@@ -1,0 +1,18 @@
+.FormInput {
+  margin: 10px 20px 10px 20px;
+  padding: 10px;
+  height: 40px;
+  width: 250px;
+}
+
+.Form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    margin: 20px;
+}
+
+.Form p{
+  color: gray;
+}

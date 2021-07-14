@@ -1,0 +1,28 @@
+.SignUpModal {
+  position: fixed;
+  z-index: 500;
+  background-color: white;
+  width: 700px;
+  height: 500px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-shadow: 1px 1px 1px black;
+  box-sizing: border-box;
+  left: calc(50% - 350px);
+  top: calc(50% - 250px);
+  transition: all 0.3s ease-out;
+}
+
+.SignUpModal{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  flex-wrap: wrap;
+}
+
+
+.Col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100%;
+  /* background-color: red; */
+}

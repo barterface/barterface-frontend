@@ -1,0 +1,29 @@
+.Container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: whitesmoke;
+  flex-wrap: wrap;
+  padding: 40px;
+}
+
+.FormInput{
+    padding:10px;
+}
+
+.form{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  grid-template-rows: repeat(2,auto);
+  grid-gap: 1rem;
+  padding: 10px;
+}
+
+@media screen and (max-width:600px) {
+  .form{
+    grid-template-columns: auto;
+    grid-template-rows: repeat(6,auto);
+    grid-gap: 1rem;
+  }
+}

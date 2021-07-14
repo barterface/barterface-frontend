@@ -1,0 +1,11 @@
+{
+  "auth": {
+    "barterfacev16a7929fe": {
+      "service": "Cognito",
+      "serviceType": "imported",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}
