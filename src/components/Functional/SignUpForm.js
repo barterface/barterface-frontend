@@ -1,24 +1,47 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector} from "react-redux";
 import classes from "./SignUpForm.module.css";
 import { Button } from "../UI/Button";
 import { Auth } from 'aws-amplify';
 import * as authAction from '../../store/action/authAction';
 
-const SignUpForm = ({ setShowModal }) => {
+const SignUpForm = ({setShowModal}) => {
   const dispatch = useDispatch();
   //local input state for sign Up
+
+  const status = useSelector(state => state.auth.status)
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [enterPassword, setEnterPassword] = useState("");
+  const [confirm, setConfirm] = useState(false);
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [inputConfirm, setInputConfirm] = useState("");
 
   //state to show signUp or SignIn form conditionally
-  const [isSignIn, setIsSignIn] = useState(false);
+  const [isSignIn, setIsSignIn] = useState(status);
 
   //Local input state for signIn
   const [signInEmail, setSignInEmail] = useState("");
   const [signInPassword, setSignInPassword] = useState("");
+
+  const signUpFormSubmitHandler = async (event) => {
+    event.preventDefault();
+    if (enterPassword === repeatPassword) {
+      try {
+        await Auth.signUp({
+          username: email,
+          password: enterPassword,
+          attributes: {
+            name: name,
+          },
+        }).then((res) => {
+          setConfirm(!confirm);
+        });
+      } catch (err) {
+        alert(err.message);
+      }
+    }
+  };
 
   const signInHandler = async (event) => {
     event.preventDefault();
@@ -27,7 +50,7 @@ const SignUpForm = ({ setShowModal }) => {
         console.log(response);
         dispatch(
           authAction.authFlow(
-            "Logged In",
+            true,
             response.attributes.sub,
             response.attributes.name,
             response.attributes.email,
@@ -41,12 +64,24 @@ const SignUpForm = ({ setShowModal }) => {
     }
   };
 
+  const confirmOTP = async (event) => {
+    event.preventDefault();
+    try {
+      await Auth.confirmSignUp(email,inputConfirm).then((response) => {
+        console.log(response)
+      });
+      setIsSignIn(!isSignIn);
+      setShowModal((prev) => !prev)
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-  const confirm = true;
+
   const signUpForm = (
     <div>
       {!confirm ? (
-        <form>
+        <form >
           <div className={classes.Form}>
             <h1>Create Account</h1>
             <input
@@ -81,7 +116,7 @@ const SignUpForm = ({ setShowModal }) => {
               onChange={(event) => setRepeatPassword(event.target.value)}
               className={classes.FormInput}
             />
-            <Button>SignUp</Button>
+            <Button onClick={signUpFormSubmitHandler}>SignUp</Button>
             <p>
               Already have an account?{" "}
               <span
@@ -99,8 +134,8 @@ const SignUpForm = ({ setShowModal }) => {
         </form>
       ) : (
         <div>
-          <form>
-            <input type="number" placeholder="confirm" name="confirm" />
+          <form onSubmit={confirmOTP}>
+            <input type="number" placeholder="confirm" name="confirm" onChange={(event) => setInputConfirm(event.target.value)} />
             <Button>Confirm OTP</Button>
           </form>
         </div>

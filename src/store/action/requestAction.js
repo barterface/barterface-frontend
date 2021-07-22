@@ -42,15 +42,21 @@ export const fetchRequest = (userId) => {
   };
 };
 
-export const addRequest = (accId, accName, accPassword, id, requesterId) => {
+export const addRequest = (
+  requesterAccId,
+  requesterAccName,
+  requesterAccPass,
+  requesterId,
+  uploadId
+  ) => {
   return async (dispatch) => {
     try {
       const data = {
-        requesterAccId: accId,
-        requesterAccName: accName,
-        requesterAccPass: accPassword,
-        uploadId: id,
-        requesterId,
+        requesterAccId : requesterAccId ,
+        requesterAccName : requesterAccName,
+        requesterAccPass : requesterAccPass,
+        requesterId : requesterId,
+        uploadId : uploadId 
       };
       const response = await axios.post(
         "https://5dzkdvg9ae.execute-api.ap-south-1.amazonaws.com/test/request",
@@ -62,16 +68,16 @@ export const addRequest = (accId, accName, accPassword, id, requesterId) => {
       dispatch({
         type: ADD_REQUEST,
         data: {
-          id: resData,
-          accName,
-          accId,
-          accPassword,
-          id,
-          requesterId,
+          requestId: resData.requesterId,
+          requesterAccName: resData.accName,
+          requesterAccId: resData.accId,
+          requesterAccPass: resData.accPass,
+          uploadId: resData.uploadId,
+          requesterId: resData.requesterId,
         },
       });
     } catch (err) {
-      console.log(err);
+      console.log(err.response);
     }
   };
 };

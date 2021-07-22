@@ -1,5 +1,5 @@
-import React from "react";
-
+import React, {useState} from "react";
+import { useSelector , useDispatch} from "react-redux";
 import { Link } from "react-router-dom";
 import { Button } from "../UI/Button";
 import classes from "./Footer.module.css";
@@ -7,9 +7,30 @@ import { FaFacebookSquare } from "react-icons/fa";
 import { GrInstagram } from "react-icons/gr";
 import { ImLinkedin } from "react-icons/im";
 import { FaTwitterSquare } from "react-icons/fa";
+import SignUp from "../Modal/SignUpModal";
+import { Auth } from "aws-amplify";
+import * as authAction from "../../store/action/authAction";
 
-const footer = () => {
+const Footer = () => {
+
+  const dispatch = useDispatch()
+  const [modal,setModal] = useState(false)
+  const status = useSelector(state => state.auth.status)
+
+  const logOutHandler = async () => {
+    try {
+      await Auth.signOut().then((resp) => {
+        console.log(resp);
+        dispatch(authAction.authFlow(false));
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
+    <>
+    { modal ? <SignUp setShowModal = {setModal} /> : null}
     <div className={classes.FooterContainer}>
       <div className={classes.FooterLinks}>
         <div className={classes.FooterLinksWrapper}>
@@ -28,9 +49,14 @@ const footer = () => {
             <Link>Give Feedback</Link>
           </div>
           <div className={classes.FooterItems}>
-            <Button buttonColor="red" buttonStyle="btnOutline">
+            { !status ?
+            <Button buttonColor="red" buttonStyle="btnOutline" onClick = {() => setModal(!modal)}>
               SignUp/LogIn
             </Button>
+            : <Button buttonColor="red" buttonStyle="btnOutline" onClick = {logOutHandler}>
+              LogOut
+            </Button>
+            }
           </div>
         </div>
       </div>
@@ -91,7 +117,8 @@ const footer = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };
 
-export default footer;
+export default Footer;

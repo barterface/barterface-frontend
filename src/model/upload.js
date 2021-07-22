@@ -1,6 +1,6 @@
 class Upload {
-  constructor(id, accName, accId, accPass, startTime, endTime, uploaderId) {
-    this.id = id;
+  constructor(uploadId, accName, accId, accPass, startTime, endTime, uploaderId) {
+    this.uploadId = uploadId;
     this.accName = accName;
     this.accId = accId;
     this.accPass = accPass;

@@ -3,12 +3,13 @@ import classes from "./SignUpModal.module.css";
 import Backdrop from "../UI/Backdrop";
 import SignUpForm from "../Functional/SignUpForm";
 
-const SignUp = ({ setShowModal }) => {
+const SignUp = ({setShowModal}) => {
+
   const [backdrop, setBackdropState] = useState(true);
 
   const backdropToggleHandler = () => {
       setBackdropState(!backdrop);
-      setShowModal(false);
+      setShowModal((prev) => !prev);
   };
   return (
     <>
@@ -40,7 +41,7 @@ const SignUp = ({ setShowModal }) => {
           <p style={{ color: "white" }}>Save Money</p>
         </div>
         <div>
-          <SignUpForm setShowModal={setShowModal} />
+          <SignUpForm setShowModal = {setShowModal}/>
         </div>
       </div>
     </>

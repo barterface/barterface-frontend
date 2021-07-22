@@ -18,15 +18,13 @@ const Explore = () => {
 
 const loadData = useCallback(async () => {
   try {
-    console.log("fetching");
     dispatch(uploadActions.fetchUpload());
   } catch (err) {
-    console.log(err + "1" + "2");
+    console.log(err);
   }
 }, [dispatch]);
 
 useEffect(() => {
-  console.log("useeffect running");
   loadData();
 }, [loadData]);
   
@@ -66,12 +64,13 @@ useEffect(() => {
 
             <div className={classes.Row}>
               {plat.map((acc) => {
+                console.log(acc.uploadId)
                 return (
                   <ExploreCard
                     startTime={acc.startTime}
                     endTime={acc.endTime}
-                    startDate
-                    endDate
+                    uploadId = {acc.uploadId}
+                    uploaderId = {acc.uploaderId}
                   />
                 );
               })}
