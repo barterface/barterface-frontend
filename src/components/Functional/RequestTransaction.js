@@ -8,7 +8,7 @@ const RequestTransaction = () => {
   const userId = useSelector((state) => state.auth.userId);
 
   const requestedData = useSelector((state) => state.request.availableRequests);
-
+  console.log(requestedData)
   const dispatch = useDispatch();
 
   const requestData = useCallback(async () => {
@@ -30,12 +30,12 @@ const RequestTransaction = () => {
             <div className = {classes.Card}>
               <div className={classes.Row}>
                 <div className={classes.Col} style={{ flex: "1" }}>
-                  <div>{new Date(data.startTime).toString().substr(0, 15)}</div>
+                  <div>{data.requesterAccName}</div>
                   <div style={{ fontWeight: "bold" }}>
-                    {new Date(data.startTime).toString().substr(16, 8)}
+                    {data.requesterAccId}
                   </div>
                   <div style={{ color: "gray", fontWeight: "bold" }}>
-                    {data.accName}
+                    {}
                   </div>
                 </div>
                 <div className={classes.Col} style={{ flex: "2" }}>
@@ -48,11 +48,11 @@ const RequestTransaction = () => {
                   ></div>
                 </div>
                 <div className={classes.Col} style={{ flex: "1" }}>
-                  <div>{new Date(data.endTime).toString().substr(0, 15)}</div>
+                  <div>{data.status}</div>
                   <div style={{ fontWeight: "bold" }}>
-                    {new Date(data.endTime).toString().substr(16, 8)}
+                    {}
                   </div>
-                  <div>{data.accName}</div>
+                  <div>{}</div>
                 </div>
 
                 <div className={classes.CardContainer}></div>

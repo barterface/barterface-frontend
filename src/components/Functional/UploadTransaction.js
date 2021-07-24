@@ -5,7 +5,6 @@ import classes from "./UploadTransaction.module.css";
 
 const UploadTransaction = () => {
   const userId = useSelector((state) => state.auth.userId);
-  console.log(userId);
 
   const uploadedData = useSelector((state) => state.upload.userUploadedData);
   console.log(uploadedData);

@@ -15,7 +15,6 @@ export const fetchUpload = () => {
       );
 
       const resData = await response.data;
-      console.log(resData);
 
       const loadedUploadData = [];
 
@@ -28,7 +27,9 @@ export const fetchUpload = () => {
             resData[key].accPass,
             resData[key].startTime,
             resData[key].endTime,
-            resData[key].uploaderId
+            resData[key].uploaderId,
+            null,
+            null
           )
         );
       }
@@ -39,18 +40,17 @@ export const fetchUpload = () => {
     }
   };
 };
+
+
 export const fetchUploadByUserid = (userId) => {
-  console.log("hello");
+
   return async (dispatch) => {
     try {
       const response = await axios.get(
         `https://5dzkdvg9ae.execute-api.ap-south-1.amazonaws.com/test/upload/userId/?userId=${userId}`
       );
 
-      console.log(response);
-
       const resData = await response.data;
-      console.log(resData);
 
       const loadedUploadData = [];
 
@@ -63,7 +63,9 @@ export const fetchUploadByUserid = (userId) => {
             resData[key].accPass,
             resData[key].startTime,
             resData[key].endTime,
-            resData[key].uploaderId
+            resData[key].uploaderId,
+            resData[key].status,
+            resData[key].reqId
           )
         );
       }
@@ -104,7 +106,7 @@ export const addUpload = (
       dispatch({
         type: ADD_UPLOAD_DATA,
         data: {
-          id: resData.uploadId,
+          uploadId: resData.uploadId,
           accName,
           accId,
           accPass,
