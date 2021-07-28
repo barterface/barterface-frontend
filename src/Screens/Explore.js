@@ -64,7 +64,6 @@ useEffect(() => {
 
             <div className={classes.Row}>
               {plat.map((acc) => {
-                console.log(acc.uploadId)
                 return (
                   <ExploreCard
                     startTime={acc.startTime}

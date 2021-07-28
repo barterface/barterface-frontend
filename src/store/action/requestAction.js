@@ -13,24 +13,20 @@ export const fetchRequest = (userId) => {
         `https://5dzkdvg9ae.execute-api.ap-south-1.amazonaws.com/test/request/userId/?userId=${userId}`
       );
 
-      // if (!response.ok) {
-      //   throw new Error("Something went wrong");
-      // }
-      //data from response
-
-      console.log(response);
-
       const resData = await response.data;
 
       const loadedRequest = [];
-
+      
       for (const key in resData) {
         loadedRequest.push(
           new Request(
-            resData[key].id,
-            resData[key].platformId,
-            resData[key].platformName,
-            resData[key].platformPassword
+            resData[key].requestId,
+            resData[key].requesterAccName,
+            resData[key].requesterId,
+            resData[key].uploadId,
+            resData[key].requesterAccId,
+            resData[key].requesterAccPass,
+            resData[key].status
           )
         );
       }
@@ -68,12 +64,13 @@ export const addRequest = (
       dispatch({
         type: ADD_REQUEST,
         data: {
-          requestId: resData.requesterId,
-          requesterAccName: resData.accName,
-          requesterAccId: resData.accId,
-          requesterAccPass: resData.accPass,
+          requestId: resData.requestId,
+          requesterAccName: resData.requesterAccName,
+          requesterAccId: resData.requesterAccId,
+          requesterAccPass: resData.requesterAccPass,
           uploadId: resData.uploadId,
           requesterId: resData.requesterId,
+          status: resData.status
         },
       });
     } catch (err) {

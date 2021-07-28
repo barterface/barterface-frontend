@@ -16,11 +16,12 @@ const reducer = (state = initialState, action) => {
     case ADD_REQUEST:
       const newRequest = new Request(
         action.data.requestId,
-        action.data.requesterAccId,
         action.data.requesterAccName,
-        action.data.requesterAccPass,
+        action.data.requesterId,
         action.data.uploadId,
-        action.data.requesterId
+        action.data.requesterAccId,
+        action.data.requesterAccPass,
+        action.data.status
       );
       return {
         ...state,
