@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import classes from "./HeroSection.module.css";
 import { Button } from "../UI/Button";
 import { useState } from "react";

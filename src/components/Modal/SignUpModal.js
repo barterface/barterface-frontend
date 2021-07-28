@@ -30,7 +30,6 @@ const SignUp = ({setShowModal}) => {
             justifyContent: "center",
             justifyItems: "center",
             borderRadius: "3px",
-            // height: "100%",
           }}
         >
           <p style={{ color: "white", fontWeight: "bold", fontSize: "40px" }}>

@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { useDispatch,useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import classes from "./SignUpForm.module.css";
 import { Button } from "../UI/Button";
-import { Auth } from 'aws-amplify';
-import * as authAction from '../../store/action/authAction';
+import { Auth } from "aws-amplify";
+import * as authAction from "../../store/action/authAction";
 
-const SignUpForm = ({setShowModal}) => {
+const SignUpForm = ({ setShowModal }) => {
   const dispatch = useDispatch();
   //local input state for sign Up
 
-  const status = useSelector(state => state.auth.status)
+  const status = useSelector((state) => state.auth.status);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [enterPassword, setEnterPassword] = useState("");
@@ -67,21 +67,20 @@ const SignUpForm = ({setShowModal}) => {
   const confirmOTP = async (event) => {
     event.preventDefault();
     try {
-      await Auth.confirmSignUp(email,inputConfirm).then((response) => {
-        console.log(response)
+      await Auth.confirmSignUp(email, inputConfirm).then((response) => {
+        console.log(response);
       });
       setIsSignIn(!isSignIn);
-      setShowModal((prev) => !prev)
+      setShowModal((prev) => !prev);
     } catch (err) {
       console.log(err);
     }
   };
 
-
   const signUpForm = (
     <div>
       {!confirm ? (
-        <form >
+        <form>
           <div className={classes.Form}>
             <h1>Create Account</h1>
             <input
@@ -116,26 +115,39 @@ const SignUpForm = ({setShowModal}) => {
               onChange={(event) => setRepeatPassword(event.target.value)}
               className={classes.FormInput}
             />
-            <Button onClick={signUpFormSubmitHandler}>SignUp</Button>
-            <p>
-              Already have an account?{" "}
-              <span
-                onClick={() => setIsSignIn(!isSignIn)}
-                style={{
-                  color: "black",
-                  fontWeight: "bold",
-                  cursor: "pointer",
-                }}
-              >
-                <u>SignIn</u>
-              </span>
-            </p>
+            <Button
+              buttonColor="red"
+              buttonStyle="btnMedium"
+              onClick={signUpFormSubmitHandler}
+            >
+              SignUp
+            </Button>
+            <div style={{ marginTop: "15px" }}>
+              <p>
+                Already have an account?{" "}
+                <span
+                  onClick={() => setIsSignIn(!isSignIn)}
+                  style={{
+                    color: "black",
+                    fontWeight: "bold",
+                    cursor: "pointer",
+                  }}
+                >
+                  <u>SignIn</u>
+                </span>
+              </p>
+            </div>
           </div>
         </form>
       ) : (
         <div>
           <form onSubmit={confirmOTP}>
-            <input type="number" placeholder="confirm" name="confirm" onChange={(event) => setInputConfirm(event.target.value)} />
+            <input
+              type="number"
+              placeholder="confirm"
+              name="confirm"
+              onChange={(event) => setInputConfirm(event.target.value)}
+            />
             <Button>Confirm OTP</Button>
           </form>
         </div>
@@ -147,6 +159,7 @@ const SignUpForm = ({setShowModal}) => {
     <form>
       <div className={classes.Form}>
         <h1 style={{ fontWeight: "bold" }}>Sign In</h1>
+
         <input
           type="email"
           placeholder="Email"
@@ -163,26 +176,34 @@ const SignUpForm = ({setShowModal}) => {
           onChange={(event) => setSignInPassword(event.target.value)}
           className={classes.FormInput}
         />
-        <Button onClick={signInHandler}>SignIn</Button>
-        <p>Forgot Password?</p>
-        <p>
-          New to BarterFace?{" "}
-          <span
-            onClick={() => setIsSignIn(!isSignIn)}
-            style={{
-              color: "black",
-              fontWeight: "bold",
-              cursor: "pointer",
-            }}
-          >
-            Register
-          </span>
-        </p>
+        {/* <p style={{marginBottom:'15px'}}>Forgot password??</p> */}
+        <Button
+          buttonColor="red"
+          buttonStyle="btnMedium"
+          onClick={signInHandler}
+        >
+          SignIn
+        </Button>
+        <div style={{marginTop:'15px'}}>
+          <p>
+            New to BarterFace?{" "}
+            <span
+              onClick={() => setIsSignIn(!isSignIn)}
+              style={{
+                color: "black",
+                fontWeight: "bold",
+                cursor: "pointer",
+              }}
+            >
+              Register
+            </span>
+          </p>
+        </div>
       </div>
     </form>
   );
 
-  return <div>{isSignIn ? signUpForm : signInForm}</div>;
+  return <>{isSignIn ? signUpForm : signInForm}</>;
 };
 
 export default SignUpForm;
