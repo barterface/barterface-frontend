@@ -3,12 +3,13 @@ import classes from "./SignUpModal.module.css";
 import Backdrop from "../UI/Backdrop";
 import SignUpForm from "../Functional/SignUpForm";
 
-const SignUp = ({ setShowModal }) => {
+const SignUp = ({setShowModal}) => {
+
   const [backdrop, setBackdropState] = useState(true);
 
   const backdropToggleHandler = () => {
       setBackdropState(!backdrop);
-      setShowModal(false);
+      setShowModal((prev) => !prev);
   };
   return (
     <>
@@ -29,7 +30,6 @@ const SignUp = ({ setShowModal }) => {
             justifyContent: "center",
             justifyItems: "center",
             borderRadius: "3px",
-            // height: "100%",
           }}
         >
           <p style={{ color: "white", fontWeight: "bold", fontSize: "40px" }}>
@@ -40,7 +40,7 @@ const SignUp = ({ setShowModal }) => {
           <p style={{ color: "white" }}>Save Money</p>
         </div>
         <div>
-          <SignUpForm setShowModal={setShowModal} />
+          <SignUpForm setShowModal = {setShowModal}/>
         </div>
       </div>
     </>

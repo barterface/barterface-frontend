@@ -1,7 +1,7 @@
 import { AUTH_FLOW } from "../action/authAction";
 
 const initialAuthState = {
-  status: "",
+  status: false,
   userId: "",
   name: "",
   email: "",

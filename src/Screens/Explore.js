@@ -7,6 +7,10 @@ import * as uploadActions from '../store/action/uploadAction';
 import Spinner from "../components/UI/Spinner";
 import classes from "./Explore.module.css";
 
+// fetch all rating Data in explore.js
+//map all rating data to uploaded data using (uploaderId in uploaded data) and (touserId in rating Data)
+//send the rating to exploreCard along with uploaderId so that we can fetch the rate and review of a particular user
+
 const Explore = () => {
 
   const uploadedData = useSelector(
@@ -18,15 +22,13 @@ const Explore = () => {
 
 const loadData = useCallback(async () => {
   try {
-    console.log("fetching");
     dispatch(uploadActions.fetchUpload());
   } catch (err) {
-    console.log(err + "1" + "2");
+    console.log(err);
   }
 }, [dispatch]);
 
 useEffect(() => {
-  console.log("useeffect running");
   loadData();
 }, [loadData]);
   
@@ -70,8 +72,8 @@ useEffect(() => {
                   <ExploreCard
                     startTime={acc.startTime}
                     endTime={acc.endTime}
-                    startDate
-                    endDate
+                    uploadId = {acc.uploadId}
+                    uploaderId = {acc.uploaderId}
                   />
                 );
               })}

@@ -14,21 +14,25 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+
     case ADD_UPLOAD_DATA:
       const newUpload = new Upload(
-        action.data.id,
+        action.data.uploadId,
         action.data.accName,
         action.data.accId,
         action.data.accPass,
         action.data.startTime,
         action.data.endTime,
-        action.data.uploaderId
+        action.data.uploaderId,
+        null,
+        null
       );
-      console.log(newUpload);
       return {
         ...state,
         availableUploadedData: state.availableUploadedData.concat(newUpload),
       };
+
+
     case UPDATE_UPLOAD_DATA:
       const index = state.availableUploadedData.findIndex(
         (acc) => acc.id === action.data.id
@@ -48,6 +52,8 @@ const reducer = (state = initialState, action) => {
         ...state,
         availableUploadedData: updatingUpload,
       };
+
+
     case DELETE_UPLOAD_DATA:
       return {
         ...state,
@@ -55,11 +61,15 @@ const reducer = (state = initialState, action) => {
           (acc) => acc.id !== action.id
         ),
       };
+
+
     case FETCH_UPLOAD_DATA:
       return {
         ...state,
         availableUploadedData: action.data,
       };
+
+      
     case FETCH_UPLOAD_DATA_BY_USERID:
       return {
         ...state,

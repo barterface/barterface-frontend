@@ -16,10 +16,13 @@ const HeroSection = ({
   alt,
   imgStart,
 }) => {
+  //const status = useSelector(state => state.auth.status)
+  //console.log(status)
   const [modal, setModal] = useState(false);
+  //const [isSignIn, setIsSignIn] = useState(status);
   return (
     <>
-      {modal ? <SignUp setShowModal={ setModal}/>:null}
+      {modal ? <SignUp setShowModal = { setModal }/>:null}
       <div
         className={
           lightBg
@@ -60,7 +63,7 @@ const HeroSection = ({
                     buttonSize="btnWide"
                     buttonColor="red"
                     buttonStyle="btnOutline"
-                    onClick={()=>setModal(true)}
+                    onClick={()=>setModal(!modal)}
                   >
                     {buttonLabel}
                   </Button>

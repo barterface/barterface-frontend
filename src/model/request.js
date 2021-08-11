@@ -1,11 +1,12 @@
 class Request {
-  constructor(id, accId, accName, accPassword, uploadId, requesterId) {
-    this.id = id;
-    this.accId = accId;
-    this.accName = accName;
-    this.accPassword = accPassword;
-    this.uploadId = uploadId;
+  constructor(requestId, requesterAccName, requesterId , uploadId , requesterAccId, requesterAccPass , status) {
+    this.requestId = requestId;
+    this.requesterAccName = requesterAccName;
     this.requesterId = requesterId;
+    this.uploadId = uploadId;
+    this.requesterAccId = requesterAccId;
+    this.requesterAccPass = requesterAccPass;
+    this.status = status;
   }
 }
 

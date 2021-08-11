@@ -1,24 +1,47 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import classes from "./SignUpForm.module.css";
 import { Button } from "../UI/Button";
-import { Auth } from 'aws-amplify';
-import * as authAction from '../../store/action/authAction';
+import { Auth } from "aws-amplify";
+import * as authAction from "../../store/action/authAction";
 
 const SignUpForm = ({ setShowModal }) => {
   const dispatch = useDispatch();
   //local input state for sign Up
+
+  const status = useSelector((state) => state.auth.status);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [enterPassword, setEnterPassword] = useState("");
+  const [confirm, setConfirm] = useState(false);
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [inputConfirm, setInputConfirm] = useState("");
 
   //state to show signUp or SignIn form conditionally
-  const [isSignIn, setIsSignIn] = useState(false);
+  const [isSignIn, setIsSignIn] = useState(status);
 
   //Local input state for signIn
   const [signInEmail, setSignInEmail] = useState("");
   const [signInPassword, setSignInPassword] = useState("");
+
+  const signUpFormSubmitHandler = async (event) => {
+    event.preventDefault();
+    if (enterPassword === repeatPassword) {
+      try {
+        await Auth.signUp({
+          username: email,
+          password: enterPassword,
+          attributes: {
+            name: name,
+          },
+        }).then((res) => {
+          setConfirm(!confirm);
+        });
+      } catch (err) {
+        alert(err.message);
+      }
+    }
+  };
 
   const signInHandler = async (event) => {
     event.preventDefault();
@@ -27,7 +50,7 @@ const SignUpForm = ({ setShowModal }) => {
         console.log(response);
         dispatch(
           authAction.authFlow(
-            "Logged In",
+            true,
             response.attributes.sub,
             response.attributes.name,
             response.attributes.email,
@@ -41,8 +64,19 @@ const SignUpForm = ({ setShowModal }) => {
     }
   };
 
+  const confirmOTP = async (event) => {
+    event.preventDefault();
+    try {
+      await Auth.confirmSignUp(email, inputConfirm).then((response) => {
+        console.log(response);
+      });
+      setIsSignIn(!isSignIn);
+      setShowModal((prev) => !prev);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-  const confirm = true;
   const signUpForm = (
     <div>
       {!confirm ? (
@@ -81,26 +115,39 @@ const SignUpForm = ({ setShowModal }) => {
               onChange={(event) => setRepeatPassword(event.target.value)}
               className={classes.FormInput}
             />
-            <Button>SignUp</Button>
-            <p>
-              Already have an account?{" "}
-              <span
-                onClick={() => setIsSignIn(!isSignIn)}
-                style={{
-                  color: "black",
-                  fontWeight: "bold",
-                  cursor: "pointer",
-                }}
-              >
-                <u>SignIn</u>
-              </span>
-            </p>
+            <Button
+              buttonColor="red"
+              buttonStyle="btnMedium"
+              onClick={signUpFormSubmitHandler}
+            >
+              SignUp
+            </Button>
+            <div style={{ marginTop: "15px" }}>
+              <p>
+                Already have an account?{" "}
+                <span
+                  onClick={() => setIsSignIn(!isSignIn)}
+                  style={{
+                    color: "black",
+                    fontWeight: "bold",
+                    cursor: "pointer",
+                  }}
+                >
+                  <u>SignIn</u>
+                </span>
+              </p>
+            </div>
           </div>
         </form>
       ) : (
         <div>
-          <form>
-            <input type="number" placeholder="confirm" name="confirm" />
+          <form onSubmit={confirmOTP}>
+            <input
+              type="number"
+              placeholder="confirm"
+              name="confirm"
+              onChange={(event) => setInputConfirm(event.target.value)}
+            />
             <Button>Confirm OTP</Button>
           </form>
         </div>
@@ -112,6 +159,7 @@ const SignUpForm = ({ setShowModal }) => {
     <form>
       <div className={classes.Form}>
         <h1 style={{ fontWeight: "bold" }}>Sign In</h1>
+
         <input
           type="email"
           placeholder="Email"
@@ -128,26 +176,34 @@ const SignUpForm = ({ setShowModal }) => {
           onChange={(event) => setSignInPassword(event.target.value)}
           className={classes.FormInput}
         />
-        <Button onClick={signInHandler}>SignIn</Button>
-        <p>Forgot Password?</p>
-        <p>
-          New to BarterFace?{" "}
-          <span
-            onClick={() => setIsSignIn(!isSignIn)}
-            style={{
-              color: "black",
-              fontWeight: "bold",
-              cursor: "pointer",
-            }}
-          >
-            Register
-          </span>
-        </p>
+        {/* <p style={{marginBottom:'15px'}}>Forgot password??</p> */}
+        <Button
+          buttonColor="red"
+          buttonStyle="btnMedium"
+          onClick={signInHandler}
+        >
+          SignIn
+        </Button>
+        <div style={{marginTop:'15px'}}>
+          <p>
+            New to BarterFace?{" "}
+            <span
+              onClick={() => setIsSignIn(!isSignIn)}
+              style={{
+                color: "black",
+                fontWeight: "bold",
+                cursor: "pointer",
+              }}
+            >
+              Register
+            </span>
+          </p>
+        </div>
       </div>
     </form>
   );
 
-  return <div>{isSignIn ? signUpForm : signInForm}</div>;
+  return <>{isSignIn ? signUpForm : signInForm}</>;
 };
 
 export default SignUpForm;

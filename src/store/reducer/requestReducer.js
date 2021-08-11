@@ -15,12 +15,13 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_REQUEST:
       const newRequest = new Request(
-        action.data.id,
-        action.data.accId,
-        action.data.accName,
-        action.data.accPassword,
+        action.data.requestId,
+        action.data.requesterAccName,
+        action.data.requesterId,
         action.data.uploadId,
-        action.data.requesterId
+        action.data.requesterAccId,
+        action.data.requesterAccPass,
+        action.data.status
       );
       return {
         ...state,

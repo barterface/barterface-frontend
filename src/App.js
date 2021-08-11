@@ -4,6 +4,10 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import Navbar from "./components/Functional/Navbar";
 import Footer from "./components/Functional/Footer";
 import Home from "./Screens/HomePage";
+import MyAccount from "./Screens/MyAccount";
+import ViewAll from "./Screens/ViewAll";
+import Request from "./Screens/Request";
+import MyTransaction from "./Screens/MyTransaction";
 import Explore from "./Screens/Explore";
 import { Auth } from "aws-amplify";
 import * as authAction from './store/action/authAction';
@@ -17,9 +21,10 @@ function App() {
   const checkAuthState = async () => {
     try {
       await Auth.currentAuthenticatedUser().then((response) => {
+        console.log(response)
         dispatch(
           authAction.authFlow(
-            "Logged In",
+            true,
             response.attributes.sub,
             response.attributes.name,
             response.attributes.email,
@@ -28,7 +33,8 @@ function App() {
         );
       });
     } catch (err) {
-      dispatch(authAction.authFlow("loggedOut"));
+      console.log("error")
+      dispatch(authAction.authFlow(false));
     }
   };
 
@@ -41,10 +47,22 @@ function App() {
       <Navbar />
       <Switch>
         <Route path="/" exact>
-          <Home />
+          {status? <Redirect to="/explore" /> : <Home />}
+        </Route>
+        <Route path="/my-transactions">
+          {status ? <MyTransaction /> : <Redirect to="/" />}
+        </Route>
+        <Route path="/my-account">
+          {status ? <MyAccount /> : <Redirect to="/" />}
         </Route>
         <Route path="/explore">
-          <Explore />
+          {status ? <Explore /> : <Redirect to="/" />}
+        </Route>
+        <Route path="/viewAll">
+          {status ? <ViewAll /> : <Redirect to="/" />}
+        </Route>
+        <Route path="/request">
+          {status ? <Request /> : <Redirect to="/" />}
         </Route>
       </Switch>
       <Footer />

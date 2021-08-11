@@ -1,0 +1,93 @@
+.Background {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.ModalWrapper {
+  width: 800px;
+  height: 500px;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
+  background: #fff;
+  color: #000;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  z-index: 10;
+  border-radius: 10px;
+}
+
+.ModalImage {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px 0 0 10px;
+  background: #000;
+}
+
+.ModalContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  line-height: 1.8;
+  color: #141414;
+}
+
+.ModalContent p {
+  margin-bottom: 1rem;
+}
+.ClosedModalButton {
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  z-index: 10;
+}
+.RequestModal {
+  position: fixed;
+  z-index: 500;
+  background-color: white;
+  width: 700px;
+  height: 500px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-shadow: 1px 1px 1px black;
+  box-sizing: border-box;
+  left: calc(50% - 350px);
+  top: calc(50% - 250px);
+  transition: all 0.3s ease-out;
+}
+
+.RequestModal{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  flex-wrap: wrap;
+}
+
+.FormInput {
+  margin: 10px 20px 10px 20px;
+  padding: 10px;
+  width: 250px;
+}
+
+.Form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    margin: 20px;
+}
+
+.Form p{
+  color: gray;
+}
