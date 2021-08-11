@@ -1,20 +1,18 @@
 import React, { useState } from "react";
-import {useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import classes from "./UploadForm.module.css";
-import { Button } from "../UI/Button";
-import * as uploadActions from '../../store/action/uploadAction';
+import * as uploadActions from "../../store/action/uploadAction";
+import { Select, Input, Button, Box } from "@chakra-ui/react";
 
 const UploadForm = () => {
-
   const dispatch = useDispatch();
-  const userId = useSelector(state => state.auth.userId);
- 
+  const userId = useSelector((state) => state.auth.userId);
+
   const [platformName, setPlatformName] = useState("");
   const [platformId, setPlatformId] = useState("");
   const [password, setPassword] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
-
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
@@ -30,14 +28,22 @@ const UploadForm = () => {
       )
     );
   };
-  
+
   return (
-    <section className={classes.Container}>
+    <Box
+      display={{ sm: "flex", base: "none" }}
+      flexDirection="column"
+      justifyContent="center"
+      alignItems="center"
+      padding="40px"
+      flexWrap="wrap"
+      bg="green.300"
+    >
       <h1>Exchange your account with others.</h1>
 
       <form className={classes.form}>
-        <select
-          className={classes.FormInput}
+        <Select
+          variant="filled"
           value={platformName}
           onChange={(event) => setPlatformName(event.currentTarget.value)}
         >
@@ -46,11 +52,11 @@ const UploadForm = () => {
           <option value="Amazon Prime">Amazon Prime</option>
           <option value="SonyLiv">SonyLiv</option>
           <option value="Hotstar">Hotstar</option>
-        </select>
+        </Select>
 
-        <input
-          className={classes.FormInput}
+        <Input
           type="text"
+          variant="filled"
           name="platformId"
           value={platformId}
           placeholder="Platform Id"
@@ -59,8 +65,8 @@ const UploadForm = () => {
           }}
           required
         />
-        <input
-          className={classes.FormInput}
+        <Input
+          variant="filled"
           type="password"
           name="password"
           value={password}
@@ -70,8 +76,8 @@ const UploadForm = () => {
           }}
           required
         />
-        <input
-          className={classes.FormInput}
+        <Input
+          variant="filled"
           type="datetime-local"
           name="startTime"
           value={startTime}
@@ -81,8 +87,8 @@ const UploadForm = () => {
           }}
           required
         />
-        <input
-          className={classes.FormInput}
+        <Input
+          variant="filled"
           type="datetime-local"
           name="endTime"
           value={endTime}
@@ -92,9 +98,11 @@ const UploadForm = () => {
           }}
           required
         />
-        <Button buttonColor="red" onClick={formSubmitHandler}>Upload</Button>
+        <Button colorScheme="red" onClick={formSubmitHandler}>
+          Upload
+        </Button>
       </form>
-    </section>
+    </Box>
   );
 };
 
