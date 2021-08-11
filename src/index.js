@@ -7,6 +7,7 @@ import ReduxThunk from 'redux-thunk'
 import uploadReducer from './store/reducer/uploadReducer';
 import requestReducer from './store/reducer/requestReducer';
 import authReducer from './store/reducer/authReducer';
+import ratingReducer from './store/reducer/ratingReducer';
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
@@ -19,7 +20,8 @@ Amplify.configure(awsmobile);
 const rootReducer = combineReducers({
   upload: uploadReducer,
   request: requestReducer,
-  auth:authReducer
+  auth:authReducer,
+  rating : ratingReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

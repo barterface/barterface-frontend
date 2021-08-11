@@ -1,5 +1,5 @@
 class Upload {
-  constructor(uploadId, accName, accId, accPass, startTime, endTime, uploaderId, status, reqId) {
+  constructor(uploadId, accName, accId, accPass, startTime, endTime, uploaderId, status, reqId, name) {
     this.uploadId = uploadId;
     this.accName = accName;
     this.accId = accId;
@@ -8,7 +8,8 @@ class Upload {
     this.endTime = endTime;
     this.uploaderId = uploaderId;
     this.status = status;
-    this.reqId = reqId
+    this.reqId = reqId;
+    this.name = name;
   }
 }
 

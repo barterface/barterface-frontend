@@ -16,7 +16,6 @@ const Explore = () => {
   const uploadedData = useSelector(
     (state) => state.upload.availableUploadedData
   );
-  // console.log(uploadedData);
 
   const dispatch = useDispatch();
 
@@ -74,6 +73,7 @@ useEffect(() => {
                     endTime={acc.endTime}
                     uploadId = {acc.uploadId}
                     uploaderId = {acc.uploaderId}
+                    name = {acc.name}
                   />
                 );
               })}

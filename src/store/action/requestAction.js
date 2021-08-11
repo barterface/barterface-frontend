@@ -26,7 +26,8 @@ export const fetchRequest = (userId) => {
             resData[key].uploadId,
             resData[key].requesterAccId,
             resData[key].requesterAccPass,
-            resData[key].status
+            resData[key].status,
+            resData[key].name
           )
         );
       }
@@ -43,7 +44,8 @@ export const addRequest = (
   requesterAccName,
   requesterAccPass,
   requesterId,
-  uploadId
+  uploadId,
+  name
   ) => {
   return async (dispatch) => {
     try {
@@ -52,7 +54,8 @@ export const addRequest = (
         requesterAccName : requesterAccName,
         requesterAccPass : requesterAccPass,
         requesterId : requesterId,
-        uploadId : uploadId 
+        uploadId : uploadId ,
+        name : name
       };
       const response = await axios.post(
         "https://5dzkdvg9ae.execute-api.ap-south-1.amazonaws.com/test/request",
@@ -70,7 +73,8 @@ export const addRequest = (
           requesterAccPass: resData.requesterAccPass,
           uploadId: resData.uploadId,
           requesterId: resData.requesterId,
-          status: resData.status
+          status: resData.status,
+          name : resData.name
         },
       });
     } catch (err) {

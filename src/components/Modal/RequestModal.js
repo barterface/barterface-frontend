@@ -9,7 +9,7 @@ import { useSpring, animated } from "react-spring";
 const RequestModal = ({ requestModal, setRequestModal, uploadId }) => {
   const dispatch = useDispatch();
 
-  const userId = useSelector((state) => state.auth.userId);
+  const { userId, name } = useSelector((state) => state.auth);
   //const req = useSelector(state => state.request.availableRequest)
   const requesterAccId = "12345";
   const requesterAccPass = "ankur";
@@ -28,7 +28,8 @@ const RequestModal = ({ requestModal, setRequestModal, uploadId }) => {
         requesterAccName,
         requesterAccPass,
         userId,
-        uploadId
+        uploadId,
+        name
       )
     );
   };
