@@ -4,6 +4,7 @@ import classes from "./SignUpForm.module.css";
 import { Button } from "../UI/Button";
 import { Auth } from "aws-amplify";
 import * as authAction from "../../store/action/authAction";
+import { Box, Input } from "@chakra-ui/react";
 
 const SignUpForm = ({ setShowModal }) => {
   const dispatch = useDispatch();
@@ -157,16 +158,17 @@ const SignUpForm = ({ setShowModal }) => {
 
   const signInForm = (
     <form>
-      <div className={classes.Form}>
-        <h1 style={{ fontWeight: "bold" }}>Sign In</h1>
+      <Box>
+        <h1>Sign In</h1>
 
-        <input
+        <Input
           type="email"
           placeholder="Email"
           name="email"
           value={signInEmail}
           onChange={(event) => setSignInEmail(event.target.value)}
-          className={classes.FormInput}
+          variant="filled"
+          // className={classes.FormInput}
         />
         <input
           type="password"
@@ -199,7 +201,7 @@ const SignUpForm = ({ setShowModal }) => {
             </span>
           </p>
         </div>
-      </div>
+      </Box>
     </form>
   );
 

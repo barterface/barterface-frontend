@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import { createStore, applyMiddleware, combineReducers, compose } from "redux";
 import { Provider } from "react-redux";
+import { ChakraProvider } from "@chakra-ui/react";
 import ReduxThunk from 'redux-thunk'
 import uploadReducer from './store/reducer/uploadReducer';
 import requestReducer from './store/reducer/requestReducer';
@@ -30,11 +31,13 @@ const store = createStore(
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
+    <ChakraProvider>
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
+    </ChakraProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
