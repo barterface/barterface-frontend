@@ -1,5 +1,5 @@
 class Request {
-  constructor(requestId, requesterAccName, requesterId , uploadId , requesterAccId, requesterAccPass , status) {
+  constructor(requestId, requesterAccName, requesterId , uploadId , requesterAccId, requesterAccPass , status, name) {
     this.requestId = requestId;
     this.requesterAccName = requesterAccName;
     this.requesterId = requesterId;
@@ -7,6 +7,7 @@ class Request {
     this.requesterAccId = requesterAccId;
     this.requesterAccPass = requesterAccPass;
     this.status = status;
+    this.name = name;
   }
 }
 

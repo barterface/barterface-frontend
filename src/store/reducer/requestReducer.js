@@ -21,7 +21,8 @@ const reducer = (state = initialState, action) => {
         action.data.uploadId,
         action.data.requesterAccId,
         action.data.requesterAccPass,
-        action.data.status
+        action.data.status,
+        action.data.name
       );
       return {
         ...state,

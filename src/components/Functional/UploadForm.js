@@ -6,8 +6,8 @@ import { Select, Input, Button, Box } from "@chakra-ui/react";
 
 const UploadForm = () => {
   const dispatch = useDispatch();
-  const userId = useSelector((state) => state.auth.userId);
-
+  const { userId, name } = useSelector(state => state.auth);
+ 
   const [platformName, setPlatformName] = useState("");
   const [platformId, setPlatformId] = useState("");
   const [password, setPassword] = useState("");
@@ -24,7 +24,8 @@ const UploadForm = () => {
         password,
         startTime,
         endTime,
-        userId
+        userId,
+        name
       )
     );
   };

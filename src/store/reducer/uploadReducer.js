@@ -25,7 +25,8 @@ const reducer = (state = initialState, action) => {
         action.data.endTime,
         action.data.uploaderId,
         null,
-        null
+        null,
+        action.data.name
       );
       return {
         ...state,

@@ -12,3 +12,4 @@ export const authFlow = (status, userId, name, email, token) => {
     },
   };
 };
+

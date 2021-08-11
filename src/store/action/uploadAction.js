@@ -29,7 +29,8 @@ export const fetchUpload = () => {
             resData[key].endTime,
             resData[key].uploaderId,
             null,
-            null
+            null,
+            resData[key].name
           )
         );
       }
@@ -65,7 +66,8 @@ export const fetchUploadByUserid = (userId) => {
             resData[key].endTime,
             resData[key].uploaderId,
             resData[key].status,
-            resData[key].reqId
+            resData[key].reqId,
+            resData[key].name
           )
         );
       }
@@ -83,7 +85,8 @@ export const addUpload = (
   accPass,
   startTime,
   endTime,
-  uploaderId
+  uploaderId,
+  name
 ) => {
   return async (dispatch) => {
     try {
@@ -94,6 +97,7 @@ export const addUpload = (
         startTime: startTime,
         endTime: endTime,
         uploaderId: uploaderId,
+        name: name
       };
       const response = await axios.post(
         "https://5dzkdvg9ae.execute-api.ap-south-1.amazonaws.com/test/upload",
@@ -113,6 +117,7 @@ export const addUpload = (
           startTime,
           endTime,
           uploaderId,
+          name
         },
       });
     } catch (err) {
