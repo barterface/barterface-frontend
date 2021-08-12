@@ -6,7 +6,7 @@ import ExploreCard from "../components/Functional/ExploreCard";
 import * as uploadActions from "../store/action/uploadAction";
 import Spinner from "../components/UI/Spinner";
 import classes from "./Explore.module.css";
-
+import { HStack, Heading, Text, Flex } from "@chakra-ui/react";
 // fetch all rating Data in explore.js
 //map all rating data to uploaded data using (uploaderId in uploaded data) and (touserId in rating Data)
 //send the rating to exploreCard along with uploaderId so that we can fetch the rate and review of a particular user
@@ -51,29 +51,54 @@ const Explore = () => {
       {combinedArray.map((plat) => {
         return plat.length > 0 ? (
           <div className={classes.Container}>
-            <div
-              className={classes.Row}
-              style={{ justifyContent: "space-between" }}
-            >
-              <h1>{plat[0].accName}</h1>
-              <Link to="/viewAll">
-                <h3>View All</h3>
-              </Link>
-            </div>
+            <HStack justifyContent="space-between">
+              <Heading>{plat[0].accName}</Heading>
 
-            <div className={classes.Row}>
+              <Link to="/viewAll">
+                <Text>View all </Text>
+              </Link>
+            </HStack>
+
+            <Flex
+              // overflow="hidden"
+              wrap="wrap"
+              // className={classes.Row}
+            >
               {plat.map((acc) => {
                 return (
-                  <ExploreCard
-                    startTime={acc.startTime}
-                    endTime={acc.endTime}
-                    uploadId = {acc.uploadId}
-                    uploaderId = {acc.uploaderId}
-                    name = {acc.name}
-                  />
+                  <>
+                    <ExploreCard
+                      startTime={acc.startTime}
+                      endTime={acc.endTime}
+                      uploadId={acc.uploadId}
+                      uploaderId={acc.uploaderId}
+                      name={acc.name}
+                    />{" "}
+                    <ExploreCard
+                      startTime={acc.startTime}
+                      endTime={acc.endTime}
+                      uploadId={acc.uploadId}
+                      uploaderId={acc.uploaderId}
+                      name={acc.name}
+                    />{" "}
+                    <ExploreCard
+                      startTime={acc.startTime}
+                      endTime={acc.endTime}
+                      uploadId={acc.uploadId}
+                      uploaderId={acc.uploaderId}
+                      name={acc.name}
+                    />{" "}
+                    <ExploreCard
+                      startTime={acc.startTime}
+                      endTime={acc.endTime}
+                      uploadId={acc.uploadId}
+                      uploaderId={acc.uploaderId}
+                      name={acc.name}
+                    />
+                  </>
                 );
               })}
-            </div>
+            </Flex>
           </div>
         ) : (
           <Spinner />
