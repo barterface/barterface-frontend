@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import classes from "./UploadForm.module.css";
 import * as uploadActions from "../../store/action/uploadAction";
-import { Select, Input, Button, Box } from "@chakra-ui/react";
+import { Select, Input, Button, Box, Text } from "@chakra-ui/react";
 
 const UploadForm = () => {
   const dispatch = useDispatch();
-  const { userId, name } = useSelector(state => state.auth);
- 
+  const { userId, name } = useSelector((state) => state.auth);
+
   const [platformName, setPlatformName] = useState("");
   const [platformId, setPlatformId] = useState("");
   const [password, setPassword] = useState("");
@@ -40,7 +40,9 @@ const UploadForm = () => {
       flexWrap="wrap"
       bg="green.300"
     >
-      <h1>Exchange your account with others.</h1>
+      <Text fontSize="lg" pb="5">
+        Exchange your account with others.
+      </Text>
 
       <form className={classes.form}>
         <Select

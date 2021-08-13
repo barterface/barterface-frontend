@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import classes from "./Navbar.module.css";
-import { Button } from '../UI/Button';
+// import { Button } from '../UI/Button';
+import { Button } from "@chakra-ui/react";
 import { ImCross } from "react-icons/im";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useSelector, useDispatch } from "react-redux";
 import { Auth } from "aws-amplify";
 import * as authAction from "../../store/action/authAction";
-import SignUp from '../Modal/SignUpModal';
+import SignUp from "../Modal/SignUpModal";
 
 const Navbar = () => {
   const [click, setClick] = useState(false);
@@ -49,7 +50,7 @@ const Navbar = () => {
 
   return (
     <>
-      {modal ? <SignUp setShowModal = {setModal} /> : null }
+      {modal ? <SignUp setShowModal={setModal} /> : null}
       <nav className={classes.Navbar}>
         <div className={classes.NavbarContainer}>
           <Link
@@ -113,19 +114,21 @@ const Navbar = () => {
           )}
           {!status
             ? button && (
-              <div className={classes.Gap}>
-                <Button
-                  buttonStyle="btnOutline"
-                  buttonColor="red"
-                  onClick = {()=> setModal(!modal)}
-                >
-                  SignUp/LogIn
-                </Button></div>
+                <div className={classes.Gap}>
+                  <Button
+                    // buttonStyle="btnOutline"
+                    // buttonColor="red"
+                    colorScheme="red"
+                    onClick={() => setModal(!modal)}
+                  >
+                    SignUp/LogIn
+                  </Button>
+                </div>
               )
             : button && (
                 <Button
-                  buttonStyle="btnOutline"
-                  buttonColor="red"
+                  // buttonStyle="btnOutline"
+                  colorScheme="red"
                   onClick={logOutHandler}
                 >
                   Log Out
@@ -133,7 +136,7 @@ const Navbar = () => {
               )}
         </div>
       </nav>
-      </>
+    </>
   );
 };
 

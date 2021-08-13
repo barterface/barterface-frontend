@@ -9,7 +9,15 @@ import { AiOutlineArrowRight, AiFillStar } from "react-icons/ai";
 import * as ratingActions from "../../store/action/ratingAction";
 import awsmobile from "../../aws-exports";
 import { useState } from "react";
-import { Box, VStack, Text, HStack, Spacer, Button } from "@chakra-ui/react";
+import {
+  Box,
+  VStack,
+  Text,
+  HStack,
+  Spacer,
+  Button,
+  useDisclosure,
+} from "@chakra-ui/react";
 const ExploreCard = (props) => {
   const dispatch = useDispatch();
   const [requestModal, setRequestModal] = useState(false);
@@ -42,7 +50,7 @@ const ExploreCard = (props) => {
   //     )
   //   );
   // };
-
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const loadRating = useCallback(async () => {
     try {
       dispatch(ratingActions.fetchRating(uploaderId));
@@ -57,13 +65,6 @@ const ExploreCard = (props) => {
 
   return (
     <>
-      {requestModal ? (
-        <RequestModal
-          requestModal={requestModal}
-          setRequestModal={setRequestModal}
-          uploadId={uploadId}
-        />
-      ) : null}
       <Box mr={8} my={5} shadow="lg" rounded="md" p={5}>
         <VStack alignItems="flex-start" height="100%">
           <HStack spacing={6} justifyItems="space-between" alignSelf="center">
@@ -92,7 +93,8 @@ const ExploreCard = (props) => {
           <Text>{name}</Text>
           <Text>{`${noOfStars} Ratings`}</Text>
           <Button
-            onClick={() => setRequestModal(!requestModal)}
+            onClick={onOpen}
+            // onClick={() => setRequestModal(!requestModal)}
             colorScheme="red"
             width="100%"
             alignSelf="center"
@@ -101,6 +103,14 @@ const ExploreCard = (props) => {
           </Button>
         </VStack>
       </Box>
+      <RequestModal
+        requestModal={requestModal}
+        setRequestModal={setRequestModal}
+        uploadId={uploadId}
+        onClose={onClose}
+        onOpen={onOpen}
+        isOpen={isOpen}
+      />
     </>
     // ?? (
     //   <>
