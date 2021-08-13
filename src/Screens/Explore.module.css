@@ -1,24 +1,25 @@
-
 /*Row Css*/
 
-.Container{
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    max-width: 1000px;
-    padding-left: 10px;
-    padding-right: 10px;
-    /* background-color: orange; */
+.Container {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  max-width: 1000px;
+  padding-left: 10px;
+  padding-right: 10px;
+  /* background-color: orange; */
 }
 
 .Row {
   display: flex;
-  margin-left: auto;
+  /* margin-left: auto;
   margin-right: auto;
-  flex-wrap: wrap;
+  flex-wrap: wrap; */
 }
-
+.Row::-webkit-scrollbar {
+  display: none;
+}
 .CardContainer {
   margin: 15px 15px 15px 15px;
   padding: 10px 10px 10px 10px;
@@ -27,4 +28,3 @@
   /* background-color: yellow; */
   align-items: center;
 }
-

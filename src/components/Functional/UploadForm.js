@@ -47,6 +47,7 @@ const UploadForm = () => {
       <form className={classes.form}>
         <Select
           variant="filled"
+          bg="white"
           value={platformName}
           onChange={(event) => setPlatformName(event.currentTarget.value)}
         >

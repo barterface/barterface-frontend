@@ -65,7 +65,7 @@ const ExploreCard = (props) => {
 
   return (
     <>
-      <Box mr={8} my={5} shadow="lg" rounded="md" p={5}>
+      <Box mr={8} my={5} shadow="lg" rounded="md" p={5} minWidth="220px">
         <VStack alignItems="flex-start" height="100%">
           <HStack spacing={6} justifyItems="space-between" alignSelf="center">
             <VStack>
