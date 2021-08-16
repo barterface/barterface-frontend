@@ -1,18 +1,17 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import UploadForm from "../components/Functional/UploadForm";
 import ExploreCard from "../components/Functional/ExploreCard";
 import * as uploadActions from "../store/action/uploadAction";
-import Spinner from "../components/UI/Spinner";
+//import Spinner from "../components/UI/Spinner";
 import classes from "./Explore.module.css";
-import { HStack, Heading, Text, Flex, Button } from "@chakra-ui/react";
+import { HStack, Heading, Text, Flex, Button ,Spinner} from "@chakra-ui/react";
 import { AiOutlineArrowRight } from "react-icons/ai";
-// fetch all rating Data in explore.js
-//map all rating data to uploaded data using (uploaderId in uploaded data) and (touserId in rating Data)
-//send the rating to exploreCard along with uploaderId so that we can fetch the rate and review of a particular user
 
 const Explore = () => {
+
+  const [isLoading,setIsLoading] = useState(false)
   const uploadedData = useSelector(
     (state) => state.upload.availableUploadedData
   );
@@ -20,6 +19,7 @@ const Explore = () => {
   const dispatch = useDispatch();
 
   const loadData = useCallback(async () => {
+    
     try {
       dispatch(uploadActions.fetchUpload());
     } catch (err) {
@@ -46,11 +46,14 @@ const Explore = () => {
 
   const combinedArray = [NetflixAcc, HotstarAcc, SonyLivAcc, AmazonAcc];
 
+  // setIsLoading(false)
+  // console.log(isLoading)
+
   return (
     <>
       <UploadForm />
-      {combinedArray.map((plat) => {
-        return plat.length > 0 ? (
+      { isLoading ? <Spinner/> : (combinedArray.map((plat) => {
+        return plat.length > 0 && (
           <div className={classes.Container}>
             <HStack justifyContent="space-between">
               <Heading>{plat[0].accName}</Heading>
@@ -112,10 +115,8 @@ const Explore = () => {
               })}
             </Flex>
           </div>
-        ) : (
-          <Spinner />
-        );
-      })}
+        )
+      }))}
     </>
   );
 };

@@ -18,18 +18,21 @@ import {
   Button,
   useDisclosure,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+
+
 const ExploreCard = (props) => {
   const dispatch = useDispatch();
   const [requestModal, setRequestModal] = useState(false);
 
   //const userId = useSelector((state) => state.auth.userId);
-  const ratingData = useSelector((state) => state.rating.availableRating);
+ //const ratingData = useSelector((state) => state.rating.availableRating);
   //console.log(ratingData)
 
-  let noOfStars = 0;
-  ratingData.forEach((element) => {
-    noOfStars = noOfStars + element.noOfStars;
-  });
+  // let noOfStars = 0;
+  // ratingData.forEach((element) => {
+  //   noOfStars = noOfStars + element.noOfStars;
+  // });
 
   // //const req = useSelector(state => state.request.availableRequest)
 
@@ -51,17 +54,6 @@ const ExploreCard = (props) => {
   //   );
   // };
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const loadRating = useCallback(async () => {
-    try {
-      dispatch(ratingActions.fetchRating(uploaderId));
-    } catch (err) {
-      console.log(err);
-    }
-  }, [dispatch]);
-
-  useEffect(() => {
-    loadRating();
-  }, [loadRating]);
 
   return (
     <>
@@ -90,8 +82,13 @@ const ExploreCard = (props) => {
           <Text fontWeight="bold" pt={2}>
             7hrs
           </Text>
-          <Text>{name}</Text>
-          <Text>{`${noOfStars} Ratings`}</Text>
+          <Link to= {{
+            pathname: '/rating',
+            search: `uploaderId=${uploaderId}`
+          }}>
+          {name}
+          </Link>
+          <Text>{`${2} Ratings`}</Text>
           <Button
             onClick={onOpen}
             // onClick={() => setRequestModal(!requestModal)}
