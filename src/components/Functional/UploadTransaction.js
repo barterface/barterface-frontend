@@ -1,3 +1,4 @@
+import { Box, Divider, Flex, HStack, Text, VStack } from "@chakra-ui/layout";
 import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as uploadActions from "../../store/action/uploadAction";
@@ -24,23 +25,33 @@ const UploadTransaction = () => {
   }, [loadData]);
 
   return (
-    <div className={classes.MyTransactions}>
-      
-
+    <Flex
+      direction="column"
+      maxWidth="90%"
+      marginLeft="auto"
+      my={3}
+      marginRight="auto"
+    >
       {uploadedData.length > 0
         ? uploadedData.map((data) => (
-            <div className = {classes.card}>
-              <div className={classes.Row}>
-                <div className={classes.Col} style={{ flex: "1" }}>
-                  <div>{new Date(data.startTime).toString().substr(0, 15)}</div>
-                  <div style={{ fontWeight: "bold" }}>
-                    {new Date(data.startTime).toString().substr(16, 8)}
-                  </div>
-                  <div style={{ color: "gray", fontWeight: "bold" }}>
+            <Box shadow="lg" p="10" rounded="xl" mt="10">
+              <HStack
+                justifyContent="center"
+                justifyItems="center"
+                alignItems="center"
+              >
+                <VStack>
+                  <Text fontSize="lg">
+                    {new Date(data.startTime).toString().substr(0, 10)}
+                  </Text>
+                  <Text fontSize="2xl" fontWeight="bold">
+                    {new Date(data.startTime).toString().substr(16, 5)}
+                  </Text>
+                  <Text fontWeight="bold" color="gray">
                     {data.accName}
-                  </div>
-                </div>
-                <div className={classes.Col} style={{ flex: "2" }}>
+                  </Text>
+                </VStack>
+                <VStack style={{ flex: "2" }}>
                   <div
                     style={{
                       height: "1px",
@@ -48,21 +59,23 @@ const UploadTransaction = () => {
                       width: "100%",
                     }}
                   ></div>
-                </div>
-                <div className={classes.Col} style={{ flex: "1" }}>
-                  <div>{new Date(data.endTime).toString().substr(0, 15)}</div>
-                  <div style={{ fontWeight: "bold" }}>
-                    {new Date(data.endTime).toString().substr(16, 8)}
-                  </div>
-                  <div>{data.accName}</div>
-                </div>
+                </VStack>
+                <VStack style={{ flex: "1" }}>
+                  <Text fontSize="lg">
+                    {new Date(data.endTime).toString().substr(0, 10)}
+                  </Text>
+                  <Text fontSize="2xl" fontWeight="bold">
+                    {new Date(data.endTime).toString().substr(16, 5)}
+                  </Text>
+                  <Text color="green.400">Uploaded</Text>
+                </VStack>
 
-                <div className={classes.CardContainer}></div>
-              </div>
-            </div>
+                {/* <div className={classes.CardContainer}></div> */}
+              </HStack>
+            </Box>
           ))
         : null}
-    </div>
+    </Flex>
   );
 };
 
