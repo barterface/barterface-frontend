@@ -9,6 +9,7 @@ import ViewAll from "./Screens/ViewAll";
 import Request from "./Screens/Request";
 import MyTransaction from "./Screens/MyTransaction";
 import Explore from "./Screens/Explore";
+import Rating from "./Screens/Rating";
 import { Auth } from "aws-amplify";
 import * as authAction from './store/action/authAction';
 import "./App.css";
@@ -63,6 +64,9 @@ function App() {
         </Route>
         <Route path="/request">
           {status ? <Request /> : <Redirect to="/" />}
+        </Route>
+        <Route path="/rating">
+          {status ? <Rating /> : <Redirect to="/" />}
         </Route>
       </Switch>
       <Footer />

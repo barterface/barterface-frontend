@@ -1,14 +1,13 @@
 import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as requestActions from "../../store/action/requestAction";
-
-import classes from "./RequestTransaction.module.css";
+import { Flex, HStack, Text, VStack } from "@chakra-ui/layout";
 
 const RequestTransaction = () => {
   const userId = useSelector((state) => state.auth.userId);
 
   const requestedData = useSelector((state) => state.request.availableRequests);
-  console.log(requestedData)
+  console.log(requestedData);
   const dispatch = useDispatch();
 
   const requestData = useCallback(async () => {
@@ -24,43 +23,54 @@ const RequestTransaction = () => {
   }, [requestData]);
 
   return (
-    <div className={classes.MyTransactions}>
+    <Flex
+      direction="column"
+      maxWidth="90%"
+      marginLeft="auto"
+      my={3}
+      marginRight="auto"
+      alignContent="center"
+    >
       {requestedData.length > 0
         ? requestedData.map((data) => (
-            <div className = {classes.Card}>
-              <div className={classes.Row}>
-                <div className={classes.Col} style={{ flex: "1" }}>
-                  <div>{data.requesterAccName}</div>
-                  <div style={{ fontWeight: "bold" }}>
-                    {data.requesterAccId}
-                  </div>
-                  <div style={{ color: "gray", fontWeight: "bold" }}>
-                    {}
-                  </div>
-                </div>
-                <div className={classes.Col} style={{ flex: "2" }}>
-                  <div
-                    style={{
-                      height: "1px",
-                      backgroundColor: "gray",
-                      width: "100%",
-                    }}
-                  ></div>
-                </div>
-                <div className={classes.Col} style={{ flex: "1" }}>
-                  <div>{data.status}</div>
-                  <div style={{ fontWeight: "bold" }}>
-                    {}
-                  </div>
-                  <div>{}</div>
-                </div>
+            <HStack
+              cursor="pointer"
+              shadow="lg"
+              p="10"
+              rounded="xl"
+              mt="10"
+              justifyContent="center"
+              justify="center"
+              justifyItems="center"
+              alignItems="center"
+            >
+              <VStack flex="1">
+                <Text fontSize="lg">{data.requesterAccName}</Text>
+                <Text fontSize="2xl" fontWeight="bold">
+                  {data.requesterAccId}
+                </Text>
+                <Text fontWeight="bold" color="gray">
+                  {data.accName}
+                </Text>
+              </VStack>
+              <VStack flex="2">
+                <div
+                  style={{
+                    height: "1px",
+                    backgroundColor: "gray",
+                    width: "100%",
+                  }}
+                ></div>
+              </VStack>
+              <VStack flex="1">
+                <Text fontWeight="bold">{data.status}</Text>
+              </VStack>
 
-                <div className={classes.CardContainer}></div>
-              </div>
-            </div>
+              {/* <div className={classes.CardContainer}></div> */}
+            </HStack>
           ))
         : null}
-    </div>
+    </Flex>
   );
 };
 
