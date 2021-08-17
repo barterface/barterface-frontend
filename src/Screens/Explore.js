@@ -17,7 +17,6 @@ const Explore = () => {
   );
 
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(false);
 
   const loadData = useCallback(async () => {
     
@@ -86,34 +85,6 @@ const Explore = () => {
                       uploaderId={acc.uploaderId}
                       name={acc.name}
                     />{" "}
-                    <ExploreCard
-                      startTime={acc.startTime}
-                      endTime={acc.endTime}
-                      uploadId={acc.uploadId}
-                      uploaderId={acc.uploaderId}
-                      name={acc.name}
-                    />{" "}
-                    <ExploreCard
-                      startTime={acc.startTime}
-                      endTime={acc.endTime}
-                      uploadId={acc.uploadId}
-                      uploaderId={acc.uploaderId}
-                      name={acc.name}
-                    />{" "}
-                    <ExploreCard
-                      startTime={acc.startTime}
-                      endTime={acc.endTime}
-                      uploadId={acc.uploadId}
-                      uploaderId={acc.uploaderId}
-                      name={acc.name}
-                    />{" "}
-                    <ExploreCard
-                      startTime={acc.startTime}
-                      endTime={acc.endTime}
-                      uploadId={acc.uploadId}
-                      uploaderId={acc.uploaderId}
-                      name={acc.name}
-                    />
                   </>
                 );
               })}
