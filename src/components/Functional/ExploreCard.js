@@ -84,7 +84,7 @@ const ExploreCard = (props) => {
           </Text>
           <Link to= {{
             pathname: '/rating',
-            search: `uploaderId=${uploaderId}`
+            search: `uploaderId=${uploaderId}&name=${name}&total=${2}`
           }}>
           {name}
           </Link>
