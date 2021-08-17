@@ -43,7 +43,7 @@ const UploadTransaction = () => {
               justifyItems="center"
               alignItems="center"
             >
-              <VStack>
+              <VStack flex="1">
                 <Text fontSize="lg">
                   {new Date(data.startTime).toString().substr(0, 10)}
                 </Text>

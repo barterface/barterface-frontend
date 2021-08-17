@@ -29,6 +29,7 @@ const RequestTransaction = () => {
       marginLeft="auto"
       my={3}
       marginRight="auto"
+      alignContent="center"
     >
       {requestedData.length > 0
         ? requestedData.map((data) => (
@@ -39,10 +40,11 @@ const RequestTransaction = () => {
               rounded="xl"
               mt="10"
               justifyContent="center"
+              justify="center"
               justifyItems="center"
               alignItems="center"
             >
-              <VStack>
+              <VStack flex="1">
                 <Text fontSize="lg">{data.requesterAccName}</Text>
                 <Text fontSize="2xl" fontWeight="bold">
                   {data.requesterAccId}
@@ -51,7 +53,7 @@ const RequestTransaction = () => {
                   {data.accName}
                 </Text>
               </VStack>
-              <VStack style={{ flex: "2" }}>
+              <VStack flex="2">
                 <div
                   style={{
                     height: "1px",
@@ -60,7 +62,7 @@ const RequestTransaction = () => {
                   }}
                 ></div>
               </VStack>
-              <VStack style={{ flex: "1" }}>
+              <VStack flex="1">
                 <Text fontWeight="bold">{data.status}</Text>
               </VStack>
 
