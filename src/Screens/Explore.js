@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import UploadForm from "../components/Functional/UploadForm";
@@ -18,6 +18,7 @@ const Explore = () => {
   );
 
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
 
   const loadData = useCallback(async () => {
     try {
@@ -49,73 +50,80 @@ const Explore = () => {
   return (
     <>
       <UploadForm />
-      {combinedArray.map((plat) => {
-        return plat.length > 0 ? (
-          <div className={classes.Container}>
-            <HStack justifyContent="space-between">
-              <Heading>{plat[0].accName}</Heading>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        combinedArray.map((plat) => {
+          return (
+            plat.length > 0 && (
+              <div className={classes.Container}>
+                <HStack justifyContent="space-between">
+                  <Heading>{plat[0].accName}</Heading>
 
-              <Link to="/viewAll">
-                <Button fontSize="md">
-                  View all
-                  <AiOutlineArrowRight></AiOutlineArrowRight>
-                </Button>
-              </Link>
-            </HStack>
+                  <Link to={{
+                    pathname: '/viewAll', state: {
+                    platformData:plat
+                  }}}>
+                    <Button fontSize="md">
+                      View all
+                      <AiOutlineArrowRight></AiOutlineArrowRight>
+                    </Button>
+                  </Link>
+                </HStack>
 
-            <Flex
-              p={5}
-              overflowX="scroll"
-              // wrap="wrap"
-              className={classes.Row}
-            >
-              {plat.map((acc) => {
-                return (
-                  <>
-                    <ExploreCard
-                      startTime={acc.startTime}
-                      endTime={acc.endTime}
-                      uploadId={acc.uploadId}
-                      uploaderId={acc.uploaderId}
-                      name={acc.name}
-                    />{" "}
-                    <ExploreCard
-                      startTime={acc.startTime}
-                      endTime={acc.endTime}
-                      uploadId={acc.uploadId}
-                      uploaderId={acc.uploaderId}
-                      name={acc.name}
-                    />{" "}
-                    <ExploreCard
-                      startTime={acc.startTime}
-                      endTime={acc.endTime}
-                      uploadId={acc.uploadId}
-                      uploaderId={acc.uploaderId}
-                      name={acc.name}
-                    />{" "}
-                    <ExploreCard
-                      startTime={acc.startTime}
-                      endTime={acc.endTime}
-                      uploadId={acc.uploadId}
-                      uploaderId={acc.uploaderId}
-                      name={acc.name}
-                    />{" "}
-                    <ExploreCard
-                      startTime={acc.startTime}
-                      endTime={acc.endTime}
-                      uploadId={acc.uploadId}
-                      uploaderId={acc.uploaderId}
-                      name={acc.name}
-                    />
-                  </>
-                );
-              })}
-            </Flex>
-          </div>
-        ) : (
-          <Spinner />
-        );
-      })}
+                <Flex
+                  p={5}
+                  overflowX="scroll"
+                  // wrap="wrap"
+                  className={classes.Row}
+                >
+                  {plat.map((acc) => {
+                    return (
+                      <>
+                        <ExploreCard
+                          startTime={acc.startTime}
+                          endTime={acc.endTime}
+                          uploadId={acc.uploadId}
+                          uploaderId={acc.uploaderId}
+                          name={acc.name}
+                        />{" "}
+                        <ExploreCard
+                          startTime={acc.startTime}
+                          endTime={acc.endTime}
+                          uploadId={acc.uploadId}
+                          uploaderId={acc.uploaderId}
+                          name={acc.name}
+                        />{" "}
+                        <ExploreCard
+                          startTime={acc.startTime}
+                          endTime={acc.endTime}
+                          uploadId={acc.uploadId}
+                          uploaderId={acc.uploaderId}
+                          name={acc.name}
+                        />{" "}
+                        <ExploreCard
+                          startTime={acc.startTime}
+                          endTime={acc.endTime}
+                          uploadId={acc.uploadId}
+                          uploaderId={acc.uploaderId}
+                          name={acc.name}
+                        />{" "}
+                        <ExploreCard
+                          startTime={acc.startTime}
+                          endTime={acc.endTime}
+                          uploadId={acc.uploadId}
+                          uploaderId={acc.uploaderId}
+                          name={acc.name}
+                        />
+                      </>
+                    );
+                  })}
+                </Flex>
+              </div>
+            )
+          );
+        })
+      )}
     </>
   );
 };
