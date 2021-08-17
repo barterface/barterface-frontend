@@ -11,7 +11,6 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 
 const Explore = () => {
 
-  const [isLoading,setIsLoading] = useState(false)
   const uploadedData = useSelector(
     (state) => state.upload.availableUploadedData
   );
